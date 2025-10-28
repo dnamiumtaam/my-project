@@ -1,1 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Download Server - Vercel</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .search-box {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e1e5e9;
+        }
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+        }
+        .file-grid {
+            padding: 20px;
+        }
+        .file-card {
+            border: 1px solid #e1e5e9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+            border: none;
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Download Server</h1>
+            <p>Powered by Vercel • Fast & Reliable</p>
+        </div>
+        
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="🔍 Tìm kiếm file..." id="searchInput">
+        </div>
 
+        <div class="file-grid" id="fileList">
+            <!-- Files will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        // 📁 DANH SÁCH FILE - CHỈNH SỬA PHẦN NÀY!
+        const files = [
+            {
+                id: 'YOUR_FILE_ID_1', // THAY BẰNG FILE ID THẬT
+                name: 'Tài liệu hướng dẫn.pdf',
+                description: 'Hướng dẫn sử dụng chi tiết',
+                size: '2.5 MB',
+                uploadDate: '2024-01-15'
+            },
+            {
+                id: 'YOUR_FILE_ID_2', // THAY BẰNG FILE ID THẬT
+                name: 'Phần mềm tiện ích.zip',
+                description: 'Bộ công cụ phát triển',
+                size: '45.2 MB', 
+                uploadDate: '2024-01-16'
+            }
+        ];
+
+        // Hiển thị file
+        function displayFiles() {
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = files.map(file => `
+                <div class="file-card">
+                    <h3>${file.name}</h3>
+                    <p>${file.description}</p>
+                    <div style="color: #666; margin: 10px 0;">
+                        📦 ${file.size} • 📅 ${file.uploadDate}
+                    </div>
+                    <a href="https://drive.google.com/uc?export=download&id=${file.id}" 
+                       class="download-btn" target="_blank">
+                        📥 Download
+                    </a>
+                </div>
+            `).join('');
+        }
+
+        // Tìm kiếm
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredFiles = files.filter(file => 
+                file.name.toLowerCase().includes(searchTerm) ||
+                file.description.toLowerCase().includes(searchTerm)
+            );
+            
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = filteredFiles.map(file => `
+                <div class="file-card">
+                    <h3>${file.name}</h3>
+                    <p>${file.description}</p>
+                    <div style="color: #666; margin: 10px 0;">
+                        📦 ${file.size} • 📅 ${file.uploadDate}
+                    </div>
+                    <a href="https://drive.google.com/uc?export=download&id=${file.id}" 
+                       class="download-btn" target="_blank">
+                        📥 Download
+                    </a>
+                </div>
+            `).join('');
+        });
+
+        // Khởi tạo
+        displayFiles();
+    </script>
+</body>
+</html>
