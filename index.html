@@ -3,678 +3,439 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚀 Download Center - Vercel</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>🔒 Download Center - Có Mật Khẩu</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #f59e0b;
-            --success: #10b981;
-            --danger: #ef4444;
-            --dark: #1f2937;
-            --light: #f8fafc;
-            --gray: #6b7280;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
-            color: var(--dark);
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        /* Header */
-        .header {
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 25px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        
-        .logo {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .stats {
             display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .stat-item {
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--primary);
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        /* Controls */
-        .controls {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
             align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
-        
-        .search-box {
-            flex: 1;
-            min-width: 250px;
-            position: relative;
-        }
-        
-        .search-input {
-            width: 100%;
-            padding: 15px 45px 15px 20px;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        
-        .search-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-        }
-        
-        .filter-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .filter-btn {
-            padding: 12px 20px;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
+
+        /* Màn hình đăng nhập */
+        .login-box {
             background: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
         }
-        
-        .filter-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
+
+        .login-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: #667eea;
         }
-        
-        /* File Grid */
-        .file-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
+
+        .login-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .login-subtitle {
+            color: #666;
             margin-bottom: 30px;
         }
-        
-        .file-card {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            border: 1px solid #f1f5f9;
-            position: relative;
-            overflow: hidden;
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
         }
-        
-        .file-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-        }
-        
-        .file-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-        }
-        
-        .file-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-        
-        .file-icon.pdf { color: #e74c3c; }
-        .file-icon.zip { color: #f39c12; }
-        .file-icon.image { color: #9b59b6; }
-        .file-icon.video { color: #3498db; }
-        .file-icon.document { color: #2ecc71; }
-        .file-icon.audio { color: #e67e22; }
-        .file-icon.other { color: var(--gray); }
-        
-        .file-header {
-            display: flex;
-            justify-content: between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
-        
-        .file-name {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--dark);
+
+        .input-label {
+            display: block;
             margin-bottom: 8px;
-            line-height: 1.4;
+            color: #333;
+            font-weight: bold;
         }
-        
-        .file-description {
-            color: var(--gray);
-            margin-bottom: 15px;
-            line-height: 1.5;
+
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
         }
-        
-        .file-meta {
+
+        .input-field:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background: #5a6fd8;
+        }
+
+        .error-msg {
+            background: #ffebee;
+            color: #c62828;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .user-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        /* Màn hình chính */
+        .main-app {
+            display: none;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .user-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-            color: var(--gray);
+            margin-top: 15px;
         }
-        
-        .file-size {
-            background: #f1f5f9;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: 500;
-        }
-        
-        .file-stats {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .download-btn {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+
+        .logout-btn {
+            background: #ff4757;
             color: white;
-            padding: 15px 25px;
-            border-radius: 12px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            padding: 10px 20px;
             border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .file-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .file-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+
+        .file-name {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .file-desc {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .file-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #888;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .download-btn {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
             width: 100%;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
         }
-        
+
         .download-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
-        }
-        
-        .download-btn:active {
-            transform: scale(0.98);
-        }
-        
-        .file-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--secondary);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        /* Footer */
-        .footer {
-            text-align: center;
-            color: white;
-            padding: 30px;
-            opacity: 0.8;
-        }
-        
-        /* Loading */
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: white;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .file-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .controls {
-                flex-direction: column;
-            }
-            
-            .search-box {
-                min-width: 100%;
-            }
-            
-            .stats {
-                gap: 20px;
-            }
+            background: #5a6fd8;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
+    <!-- MÀN HÌNH ĐĂNG NHẬP -->
+    <div class="login-box" id="loginBox">
+        <div class="login-icon">🔒</div>
+        <h1 class="login-title">Đăng Nhập</h1>
+        <p class="login-subtitle">Nhập tài khoản và mật khẩu để tiếp tục</p>
+        
+        <div class="error-msg" id="errorMsg">
+            Sai tài khoản hoặc mật khẩu!
+        </div>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <label class="input-label">Tài khoản:</label>
+                <input type="text" class="input-field" id="username" placeholder="Nhập tài khoản" required>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">Mật khẩu:</label>
+                <input type="password" class="input-field" id="password" placeholder="Nhập mật khẩu" required>
+            </div>
+
+            <button type="submit" class="login-btn">Đăng Nhập</button>
+        </form>
+
+        <div class="user-info">
+            <strong>Tài khoản mẫu:</strong><br>
+            👤 Tài khoản: <strong>admin</strong> | Mật khẩu: <strong>123456</strong><br>
+            👤 Tài khoản: <strong>user</strong> | Mật khẩu: <strong>123456</strong>
+        </div>
+    </div>
+
+    <!-- MÀN HÌNH CHÍNH -->
+    <div class="main-app" id="mainApp">
         <div class="header">
-            <div class="logo">
-                <i class="fas fa-cloud-download-alt"></i>
-            </div>
-            <h1>Download Center Pro</h1>
-            <p>Tải xuống tài liệu, phần mềm và đa phương tiện</p>
+            <h1>📁 Download Center</h1>
+            <p>Chào mừng <span id="userName">User</span>!</p>
             
-            <div class="stats">
-                <div class="stat-item">
-                    <div class="stat-number" id="totalFiles">0</div>
-                    <div class="stat-label">Tổng số file</div>
+            <div class="user-bar">
+                <div>
+                    👤 Đang đăng nhập với quyền: <strong id="userRole">User</strong>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="totalDownloads">0</div>
-                    <div class="stat-label">Lượt tải xuống</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="totalSize">0 MB</div>
-                    <div class="stat-label">Tổng dung lượng</div>
-                </div>
+                <button class="logout-btn" onclick="logout()">🚪 Đăng xuất</button>
             </div>
         </div>
-        
-        <!-- Controls -->
-        <div class="controls">
-            <div class="search-box">
-                <input type="text" class="search-input" placeholder="🔍 Tìm kiếm file..." id="searchInput">
-            </div>
-            
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">Tất cả</button>
-                <button class="filter-btn" data-filter="document"><i class="fas fa-file-pdf"></i> Tài liệu</button>
-                <button class="filter-btn" data-filter="software"><i class="fas fa-cogs"></i> Phần mềm</button>
-                <button class="filter-btn" data-filter="media"><i class="fas fa-film"></i> Đa phương tiện</button>
-                <button class="filter-btn" data-filter="other"><i class="fas fa-file"></i> Khác</button>
-            </div>
-        </div>
-        
-        <!-- File Grid -->
+
         <div class="file-grid" id="fileGrid">
-            <div class="loading">
-                <i class="fas fa-spinner fa-spin"></i> Đang tải...
-            </div>
-        </div>
-        
-        <!-- Footer -->
-        <div class="footer">
-            <p>Powered by Vercel • 📊 Tracking thời gian thực</p>
+            <!-- Files sẽ hiện ở đây -->
         </div>
     </div>
 
     <script>
-        // 📊 TRACKING SYSTEM - Lưu vào localStorage
-        class TrackingSystem {
-            constructor() {
-                this.storageKey = 'downloadTracker';
-                this.init();
+        // 🔐 TÀI KHOẢN ĐĂNG NHẬP
+        const USERS = {
+            'admin': {
+                password: '123456',
+                name: 'Quản Trị Viên',
+                role: 'admin'
+            },
+            'user': {
+                password: '123456', 
+                name: 'Người Dùng',
+                role: 'user'
+            },
+            'guest': {
+                password: '123456',
+                name: 'Khách',
+                role: 'guest'
             }
-            
-            init() {
-                if (!this.getData()) {
-                    this.resetData();
-                }
-                this.updateStats();
+        };
+
+        // 📁 DANH SÁCH FILE
+        const ALL_FILES = [
+            {
+                id: '1abc123def456',
+                name: 'Tài liệu hướng dẫn.pdf',
+                description: 'File hướng dẫn sử dụng cơ bản',
+                size: '2.5 MB',
+                type: 'pdf',
+                access: ['admin', 'user', 'guest']
+            },
+            {
+                id: '2xyz789uvw012',
+                name: 'Phần mềm tiện ích.zip',
+                description: 'Bộ công cụ phát triển phần mềm',
+                size: '45.2 MB',
+                type: 'zip', 
+                access: ['admin', 'user']
+            },
+            {
+                id: '3mno345pqr678',
+                name: 'Tài liệu nội bộ.docx',
+                description: 'Tài liệu quan trọng dành cho quản trị',
+                size: '3.8 MB',
+                type: 'docx',
+                access: ['admin']
+            },
+            {
+                id: '4jkl901stu234',
+                name: 'Video training.mp4',
+                description: 'Video đào tạo hướng dẫn chi tiết',
+                size: '120.5 MB',
+                type: 'mp4',
+                access: ['admin', 'user']
             }
-            
-            getData() {
-                return JSON.parse(localStorage.getItem(this.storageKey)) || null;
+        ];
+
+        let currentUser = null;
+
+        // 🚀 KHỞI ĐỘNG ỨNG DỤNG
+        function initApp() {
+            // Kiểm tra nếu đã đăng nhập trước đó
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                showMainApp();
             }
-            
-            saveData(data) {
-                localStorage.setItem(this.storageKey, JSON.stringify(data));
-            }
-            
-            resetData() {
-                const initialData = {
-                    totalDownloads: 0,
-                    fileDownloads: {},
-                    lastUpdated: new Date().toISOString()
+
+            // Xử lý form đăng nhập
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                login();
+            });
+        }
+
+        // 🔐 ĐĂNG NHẬP
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (USERS[username] && USERS[username].password === password) {
+                currentUser = {
+                    username: username,
+                    name: USERS[username].name,
+                    role: USERS[username].role
                 };
-                this.saveData(initialData);
-            }
-            
-            trackDownload(fileId, fileName) {
-                const data = this.getData();
-                data.totalDownloads++;
-                data.fileDownloads[fileId] = (data.fileDownloads[fileId] || 0) + 1;
-                data.lastUpdated = new Date().toISOString();
-                this.saveData(data);
                 
-                // Hiển thị thông báo
-                this.showNotification(`Đã bắt đầu tải: ${fileName}`);
+                // Lưu thông tin đăng nhập
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
                 
-                this.updateStats();
-                return data.fileDownloads[fileId];
-            }
-            
-            updateStats() {
-                const data = this.getData();
-                document.getElementById('totalDownloads').textContent = data.totalDownloads.toLocaleString();
-            }
-            
-            showNotification(message) {
-                // Tạo toast notification
-                const toast = document.createElement('div');
-                toast.style.cssText = `
-                    position: fixed;
-                    bottom: 20px;
-                    right: 20px;
-                    background: var(--success);
-                    color: white;
-                    padding: 15px 25px;
-                    border-radius: 10px;
-                    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-                    z-index: 1000;
-                    animation: slideIn 0.3s ease;
-                `;
-                toast.innerHTML = `
-                    <i class="fas fa-check-circle"></i> ${message}
-                `;
-                document.body.appendChild(toast);
-                
-                setTimeout(() => {
-                    toast.remove();
-                }, 3000);
+                showMainApp();
+                hideError();
+            } else {
+                showError();
             }
         }
 
-        // 🎯 FILE MANAGEMENT SYSTEM
-        class FileManager {
-            constructor() {
-                this.files = [];
-                this.filteredFiles = [];
-                this.currentFilter = 'all';
-                this.tracking = new TrackingSystem();
-                this.init();
-            }
+        // 🚪 ĐĂNG XUẤT
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            showLoginForm();
+            document.getElementById('loginForm').reset();
+        }
+
+        // 🖥️ HIỂN THỊ MÀN HÌNH CHÍNH
+        function showMainApp() {
+            document.getElementById('loginBox').style.display = 'none';
+            document.getElementById('mainApp').style.display = 'block';
             
-            init() {
-                this.loadFiles();
-                this.setupEventListeners();
-                this.renderFiles();
-                this.updateFileStats();
-            }
+            // Cập nhật thông tin user
+            document.getElementById('userName').textContent = currentUser.name;
+            document.getElementById('userRole').textContent = currentUser.role;
             
-            loadFiles() {
-                // 📁 DANH SÁCH FILE - THÊM FILE CỦA BẠN VÀO ĐÂY
-                this.files = [
-                    {
-                        id: '1ABC123def456',
-                        name: 'Tài liệu hướng dẫn nâng cao',
-                        description: 'Hướng dẫn chi tiết sử dụng hệ thống với đầy đủ tính năng',
-                        size: '3.2 MB',
-                        type: 'pdf',
-                        category: 'document',
-                        uploadDate: '2024-01-15',
-                        downloads: 0,
-                        icon: 'pdf'
-                    },
-                    {
-                        id: '2XYZ789uvw012',
-                        name: 'Bộ công cụ phát triển Full',
-                        description: 'Bộ phần mềm đầy đủ cho lập trình viên, bao gồm IDE và tools',
-                        size: '156.7 MB',
-                        type: 'zip',
-                        category: 'software',
-                        uploadDate: '2024-01-16',
-                        downloads: 0,
-                        icon: 'zip'
-                    },
-                    {
-                        id: '3MNO345pqr678',
-                        name: 'Video hướng dẫn chất lượng cao',
-                        description: 'Video tutorial 4K với hướng dẫn từng bước chi tiết',
-                        size: '245.3 MB',
-                        type: 'mp4',
-                        category: 'media',
-                        uploadDate: '2024-01-17',
-                        downloads: 0,
-                        icon: 'video'
-                    },
-                    {
-                        id: '4JKL901stu234',
-                        name: 'Ảnh minh họa thiết kế',
-                        description: 'Bộ sưu tập hình ảnh chất lượng cao cho thiết kế đồ họa',
-                        size: '89.1 MB',
-                        type: 'zip',
-                        category: 'media',
-                        uploadDate: '2024-01-18',
-                        downloads: 0,
-                        icon: 'image'
-                    },
-                    {
-                        id: '5GHI567vwx890',
-                        name: 'E-book tổng hợp kiến thức',
-                        description: 'Sách điện tử bao gồm các chủ đề công nghệ mới nhất',
-                        size: '15.8 MB',
-                        type: 'epub',
-                        category: 'document',
-                        uploadDate: '2024-01-19',
-                        downloads: 0,
-                        icon: 'document'
-                    },
-                    {
-                        id: '6DEF234yza567',
-                        name: 'Audio book tóm tắt',
-                        description: 'Bản ghi âm đầy đủ với chất lượng âm thanh cao cấp',
-                        size: '67.4 MB',
-                        type: 'mp3',
-                        category: 'media',
-                        uploadDate: '2024-01-20',
-                        downloads: 0,
-                        icon: 'audio'
-                    }
-                ];
-                
-                this.filteredFiles = [...this.files];
+            // Hiển thị files
+            loadFiles();
+        }
+
+        // 🔑 HIỂN THỊ MÀN HÌNH ĐĂNG NHẬP
+        function showLoginForm() {
+            document.getElementById('loginBox').style.display = 'block';
+            document.getElementById('mainApp').style.display = 'none';
+        }
+
+        // ❌ HIỂN THỊ LỖI
+        function showError() {
+            document.getElementById('errorMsg').style.display = 'block';
+        }
+
+        function hideError() {
+            document.getElementById('errorMsg').style.display = 'none';
+        }
+
+        // 📁 LOAD DANH SÁCH FILE
+        function loadFiles() {
+            const fileGrid = document.getElementById('fileGrid');
+            const userFiles = ALL_FILES.filter(file => 
+                file.access.includes(currentUser.role) || 
+                file.access.includes(currentUser.username)
+            );
+
+            if (userFiles.length === 0) {
+                fileGrid.innerHTML = '<div class="file-card"><p>Không có file nào để hiển thị.</p></div>';
+                return;
             }
-            
-            setupEventListeners() {
-                // Tìm kiếm
-                document.getElementById('searchInput').addEventListener('input', (e) => {
-                    this.searchFiles(e.target.value);
-                });
-                
-                // Filter buttons
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const filter = e.target.dataset.filter;
-                        this.setFilter(filter);
-                    });
-                });
-            }
-            
-            searchFiles(query) {
-                const searchTerm = query.toLowerCase().trim();
-                
-                if (!searchTerm) {
-                    this.filteredFiles = [...this.files];
-                } else {
-                    this.filteredFiles = this.files.filter(file => 
-                        file.name.toLowerCase().includes(searchTerm) ||
-                        file.description.toLowerCase().includes(searchTerm) ||
-                        file.type.toLowerCase().includes(searchTerm)
-                    );
-                }
-                
-                this.applyCurrentFilter();
-                this.renderFiles();
-            }
-            
-            setFilter(filter) {
-                this.currentFilter = filter;
-                
-                // Update active button
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.filter === filter);
-                });
-                
-                this.applyCurrentFilter();
-                this.renderFiles();
-            }
-            
-            applyCurrentFilter() {
-                if (this.currentFilter === 'all') {
-                    // Giữ nguyên filteredFiles
-                    return;
-                }
-                
-                const filterMap = {
-                    'document': ['document'],
-                    'software': ['software'],
-                    'media': ['media'],
-                    'other': ['other']
-                };
-                
-                const allowedCategories = filterMap[this.currentFilter] || [];
-                this.filteredFiles = this.filteredFiles.filter(file => 
-                    allowedCategories.includes(file.category)
-                );
-            }
-            
-            renderFiles() {
-                const fileGrid = document.getElementById('fileGrid');
-                
-                if (this.filteredFiles.length === 0) {
-                    fileGrid.innerHTML = `
-                        <div style="grid-column: 1/-1; text-align: center; padding: 60px; color: var(--gray);">
-                            <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 20px; opacity: 0.5;"></i>
-                            <h3>Không tìm thấy file nào</h3>
-                            <p>Thử tìm kiếm với từ khóa khác hoặc đổi bộ lọc</p>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                fileGrid.innerHTML = this.filteredFiles.map(file => `
-                    <div class="file-card" data-file-id="${file.id}">
-                        ${file.downloads > 10 ? '<div class="file-badge">Phổ biến</div>' : ''}
-                        
-                        <div class="file-icon ${file.icon}">
-                            <i class="fas fa-${this.getFileIcon(file.type)}"></i>
-                        </div>
-                        
-                        <div class="file-header">
-                            <h3 class="file-name">${file.name}</h3>
-                        </div>
-                        
-                        <p class="file-description">${file.description}</p>
-                        
-                        <div class="file-meta">
-                            <span class="file-size">${file.size}</span>
-                            <div class="file-stats">
-                                <span><i class="fas fa-download"></i> ${file.downloads}</span>
-                                <span><i class="far fa-calendar"></i> ${file.uploadDate}</span>
-                            </div>
-                        </div>
-                        
-                        <button class="download-btn" onclick="fileManager.downloadFile('${file.id}', '${file.name}')">
-                            <i class="fas fa-download"></i>
-                            Tải xuống
-                        </button>
+
+            fileGrid.innerHTML = userFiles.map(file => `
+                <div class="file-card">
+                    <div class="file-icon">📄</div>
+                    <h3 class="file-name">${file.name}</h3>
+                    <p class="file-desc">${file.description}</p>
+                    <div class="file-meta">
+                        <span>📦 ${file.size}</span>
+                        <span>${getAccessBadge(file.access)}</span>
                     </div>
-                `).join('');
-            }
-            
-            getFileIcon(fileType) {
-                const iconMap = {
-                    'pdf': 'file-pdf',
-                    'zip': 'file-archive',
-                    'mp4': 'file-video',
-                    'mp3': 'file-audio',
-                    'epub': 'book',
-                    'doc': 'file-word',
-                    'docx': 'file-word',
-                    'xls': 'file-excel',
-                    'xlsx': 'file-excel',
-                    'ppt': 'file-powerpoint',
-                    'pptx': 'file-powerpoint',
-                    'jpg': 'file-image',
-                    'png': 'file-image',
-                    'gif': 'file-image'
-                };
-                
-                return iconMap[fileType] || 'file';
-            }
-            
-            downloadFile(fileId, fileName) {
-                // Track download
-                const downloadCount = this.tracking.trackDownload(fileId, fileName);
-                
-                // Update file download count in UI
-                const fileCard = document.querySelector(`[data-file-id="${fileId}"]`);
-                if (fileCard) {
-                    const downloadCountElement = fileCard.querySelector('.file-stats span:first-child');
-                    if (downloadCountElement) {
-                        downloadCountElement.innerHTML = `<i class="fas fa-download"></i> ${downloadCount}`;
-                    }
-                }
-                
-                // Open download link
-                const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-                window.open(downloadUrl, '_blank');
-            }
-            
-            updateFileStats() {
-                const totalFiles = this.files.length;
-                const totalSize = this.files.reduce((sum, file) => {
-                    const size = parseFloat(file.size);
-                    return sum + (isNaN(size) ? 0 : size);
-                }, 0);
-                
-                document.getElementById('totalFiles').textContent = totalFiles;
-                document.getElementById('totalSize').textContent = `${totalSize.toFixed(1)} MB`;
-            }
+                    <button class="download-btn" onclick="downloadFile('${file.id}', '${file.name}')">
+                        📥 Tải xuống
+                    </button>
+                </div>
+            `).join('');
         }
 
-        // Khởi tạo ứng dụng
-        const fileManager = new FileManager();
+        // 🏷️ HIỂN THỊ QUYỀN TRUY CẬP
+        function getAccessBadge(access) {
+            if (access.includes('guest')) return '🔓 Công khai';
+            if (access.includes('user')) return '🔐 Nội bộ';
+            if (access.includes('admin')) return '🔒 Bảo mật';
+            return '❓ Không xác định';
+        }
+
+        // 📥 TẢI FILE
+        function downloadFile(fileId, fileName) {
+            // Ghi log download
+            const downloadLog = {
+                fileId: fileId,
+                fileName: fileName,
+                user: currentUser.username,
+                timestamp: new Date().toLocaleString('vi-VN'),
+                userAgent: navigator.userAgent
+            };
+            
+            console.log('Download log:', downloadLog);
+            
+            // Mở link download Google Drive
+            const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+            window.open(downloadUrl, '_blank');
+            
+            // Hiển thị thông báo
+            alert(`Đang tải: ${fileName}`);
+        }
+
+        // 🚀 CHẠY ỨNG DỤNG
+        document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
 </html>
