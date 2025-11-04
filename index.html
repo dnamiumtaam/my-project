@@ -3,38 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔒 Download Center - Có Mật Khẩu</title>
+    <title>File Download Hub</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            line-height: 1.6;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             padding: 20px;
         }
-
-        /* Màn hình đăng nhập */
-        .login-box {
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .platforms {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .platform-card {
             background: white;
-            padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 30px;
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .platform-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .google-drive .platform-icon {
+            color: #4285F4;
+        }
+        
+        .github .platform-icon {
+            color: #333;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
             text-align: center;
         }
-
-        .login-icon {
-            font-size: 50px;
+        
+        .platform-description {
+            margin-bottom: 25px;
+            color: #555;
+            text-align: center;
+        }
+        
+        .file-list {
+            list-style-type: none;
+            margin-bottom: 25px;
+        }
+        
+        .file-item {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+        
+        .file-item:hover {
+            background-color: #e9ecef;
+        }
+        
+        .file-name {
+            font-weight: 500;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(37, 117, 252, 0.4);
+        }
+        
+        .instructions {
+            margin-top: 50px;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .instructions h2 {
+            text-align: left;
             margin-bottom: 20px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: white;
+            opacity: 0.8;
+            padding: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .platforms {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .platform-card {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>File Download Hub</h1>
+            <p class="subtitle">Tải xuống các file từ Google Drive và GitHub một cách dễ dàng và nhanh chóng</p>
+        </header>
+        
+        <div class="platforms">
+            <div class="platform-card google-drive">
+                <div class="platform-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M7.71,3.5L1.15,15L4.58,21L11.13,9.5M9.73,15L6.3,21H19.42L22.85,15M22.28,14L15.42,2H8.58L8.57,2L15.43,14H22.28Z" />
+                    </svg>
+                </div>
+                <h2>Google Drive</h2>
+                <p class="platform-description">Tải file từ Google Drive với tốc độ cao</p>
+                
+                <ul class="file-list">
+                    <li class="file-item">
+                        <span class="file-name">Tài liệu hướng dẫn.pdf</span>
+                        <button class="download-btn" data-file="https://drive.google.com/uc?export=download&id=YOUR_FILE_ID_1">Tải xuống</button>
+                    </li>
+                    <li class="file-item">
+                        <span class="file-name">Báo cáo tháng.xlsx</span>
+                        <button class="download-btn" data-file="https://drive.google.com/uc?export=download&id=YOUR_FILE_ID_2">Tải xuống</button>
+                    </li>
+                    <li class="file-item">
+                        <span class="file-name">Hình ảnh minh họa.zip</span>
+                        <button class="download-btn" data-file="https://drive.google.com/uc?export=download&id=YOUR_FILE_ID_3">Tải xuống</button>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="platform-card github">
+                <div class="platform-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z" />
+                    </svg>
+                </div>
+                <h2>GitHub</h2>
+                <p class="platform-description">Tải file từ GitHub Repository</p>
+                
+                <ul class="file-list">
+                    <li class="file-item">
+                        <span class="file-name">Source code.zip</span>
+                        <button class="download-btn" data-file="https://github.com/username/repository/raw/main/path/to/file1.zip">Tải xuống</button>
+                    </li>
+                    <li class="file-item">
+                        <span class="file-name">Tài liệu kỹ thuật.docx</span>
+                        <button class="download-btn" data-file="https://github.com/username/repository/raw/main/path/to/file2.docx">Tải xuống</button>
+                    </li>
+                    <li class="file-item">
+                        <span class="file-name">Database backup.sql</span>
+                        <button class="download-btn" data-file="https://github.com/username/repository/raw/main/path/to/file3.sql">Tải xuống</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h2>Hướng dẫn sử dụng</h2>
+            <ol>
+                <li><strong>Đối với Google Drive:</strong> Thay thế "YOUR_FILE_ID" trong URL bằng ID file thực tế từ Google Drive của bạn.</li>
+                <li><strong>Đối với GitHub:</strong> Thay thế "username/repository/path/to/file" bằng đường dẫn thực tế đến file trong repository của bạn.</li>
+                <li>Để triển khai lên Vercel, đơn giản kéo thư mục chứa các file này lên Vercel hoặc kết nối với GitHub repository.</li>
+                <li>Đảm bảo các file trên Google Drive có chế độ chia sẻ là "Bất kỳ ai có liên kết" để có thể tải xuống.</li>
+            </ol>
+            <p>Trang web này đã được tối ưu hóa để hoạt động tốt trên mọi thiết bị và sẵn sàng triển khai lên Vercel.</p>
+        </div>
+        
+        <footer>
+            <p>© 2023 File Download Hub. Được thiết kế để triển khai trên Vercel.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Xử lý sự kiện khi nhấn nút tải xuống
+        document.querySelectorAll('.download-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const fileUrl = this.getAttribute('data-file');
+                if (fileUrl && (fileUrl.includes('YOUR_FILE_ID') || fileUrl.includes('username/repository'))) {
+                    alert('Vui lòng cập nhật URL file trước khi sử dụng!');
+                } else {
+                    window.open(fileUrl, '_blank');
+                }
+            });
+        });
+    </script>
+</body>
+</html>            margin-bottom: 20px;
             color: #667eea;
         }
 
